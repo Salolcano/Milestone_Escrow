@@ -1,0 +1,16 @@
+{
+  "name": "MilestoneEscrow",
+  "short_name": "Escrow",
+  "description": "Milestone payments verified by GenLayer validators",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#9B6AF6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

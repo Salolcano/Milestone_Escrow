@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/* GenLayer Brand Guidelines 2025 - Typography via local fonts */
+/* --font-body / --font-display: Switzer */
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+/* Light, monochrome system: white paper, black ink, hairlines. Status colours are the only colour. */
+:root {
+  --font-body: 'Switzer';
+  --font-display: 'Switzer';
+
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f3;
+  --secondary-foreground: #000000;
+  --muted: #f5f5f3;
+  --muted-foreground: #6b6b66;
+  --accent: #efefec;
+  --accent-foreground: #000000;
+  --destructive: #b3261e;
+  --destructive-foreground: #ffffff;
+  --border: #e4e4df;
+  --input: #cfcfc9;
+  --ring: #000000;
+
+  --ok: #0f7a4f;
+  --warn: #9a5b00;
+  --bad: #b3261e;
+
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    background: var(--background);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), var(--font-body), sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Bordered panel used inside dialogs and the account menu. */
+  .surface {
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* The one orchestrated moment: the hero drawing draws itself once. */
+  .draw {
+    stroke-dasharray: var(--len, 600);
+    stroke-dashoffset: var(--len, 600);
+    animation: draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  .pop {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+    animation-delay: var(--delay, 0s);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .draw { animation: none; stroke-dashoffset: 0; }
+  .pop { animation: none; opacity: 1; }
+  .animate-fade-in { animation: none; }
+}
+
+/* Transaction Kit panel always renders on a black plate, so it stays legible on the white page. */
+.tx-plate {
+  background: #000;
+  color: #fff;
+  border-radius: 1rem;
+  padding: 0.25rem;
+}
